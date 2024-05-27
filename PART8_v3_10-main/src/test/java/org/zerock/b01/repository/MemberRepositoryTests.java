@@ -62,7 +62,7 @@ public class MemberRepositoryTests {
     @Commit
     public void testUpdate() {
 
-        String mid ="cookie_00@naver.com";
+        String mid ="이상용@test.com";
         String mpw = passwordEncoder.encode("54321");
 
         memberRepository.updatePassword(mpw,mid);

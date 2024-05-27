@@ -45,11 +45,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         OAuth2User oAuth2User = super.loadUser(userRequest);
         Map<String, Object> paramMap = oAuth2User.getAttributes();
 
+        paramMap.forEach((k, v) -> log.info("KEY: "+k+" VALUE: "+v));
+
         String email = null;
 
         switch (clientName){
             case "kakao":
                 email = getKakaoEmail(paramMap);
+                email += "@test.com";
+//                email = "test2@test.com";
                 break;
         }
 
@@ -105,17 +109,22 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         log.info("KAKAO-----------------------------------------");
 
-        Object value = paramMap.get("kakao_account");
+//        Object value = paramMap.get("kakao_account");
+        Object value2 = paramMap.get("properties");
 
-        log.info(value);
+//        log.info(value);
+        log.info(value2);
 
-        LinkedHashMap accountMap = (LinkedHashMap) value;
+//        LinkedHashMap accountMap = (LinkedHashMap) value;
+        LinkedHashMap accountMap2 = (LinkedHashMap) value2;
 
-        String email = (String)accountMap.get("email");
+//        String email = (String)accountMap.get("email");
+        String nickname = (String)accountMap2.get("nickname");
 
-        log.info("email..." + email);
+//        log.info("email..." + email);
+        log.info("nickname..." + nickname);
 
-        return email;
+        return nickname;
     }
 
 }
